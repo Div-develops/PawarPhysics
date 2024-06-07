@@ -14,6 +14,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import UploadIcon from "@mui/icons-material/UploadFileRounded";
+import { getAuth, signOut } from "firebase/auth";
 
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
@@ -99,6 +100,17 @@ export default function Navbar({ onSearch }) {
     }
   };
 
+
+  const handleSignOut = () => {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        navigate("/login")
+      })
+      .catch((error) => {
+        console.error("Error signing out:", error);
+      });
+  };
   const menuId = "primary-search-account-menu";
   const mobileMenuId = "primary-search-account-menu-mobile";
 
@@ -120,8 +132,10 @@ export default function Navbar({ onSearch }) {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleSignOut}>Sign out</MenuItem>
     </Menu>
   );
+
 
   const renderMobileMenu = (
     <Menu
