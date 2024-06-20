@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../login/login.css";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {app} from '../../index'
 import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import "./signup.css";
@@ -11,7 +12,7 @@ function SignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-  const auth = getAuth();
+  const auth = getAuth(app);
   const navigate = useNavigate();
 
   async function handleSignUp(e) {
@@ -73,11 +74,12 @@ function SignUpPage() {
             <div className="field">
               <TextField
                 id="outlined-basic"
-                label=""
+                label="Enter email"
                 variant="outlined"
                 autoComplete="Off"
                 aria-autocomplete="false"
-                placeholder="Enter your Email address"
+                placeholder=""
+                type="email"
                 name="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -89,10 +91,10 @@ function SignUpPage() {
               <TextField
                 id="outlined-basic"
                 label=""
+                type="password"
                 variant="outlined"
                 autoComplete="Off"
                 aria-autocomplete="false"
-                placeholder="Password"
                 name="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

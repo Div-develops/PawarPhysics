@@ -1,0 +1,47 @@
+.profile-box {
+    width: 300px;
+    padding: 40px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: 'Poppins';
+        
+    word-wrap: break-word;
+        
+}
+
+.profile-image-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.profile-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-image:hover{
+    transform: scale(1.2);
+}
+
+.profile-details {
+    margin-top: 10px;
+}
+
+.profile-username,
+.profile-email {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+   .profile-box{
+    width:240px;
+    padding:20px;
+   }
+}

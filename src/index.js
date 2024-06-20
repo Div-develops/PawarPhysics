@@ -6,7 +6,7 @@ import { initializeApp } from 'firebase/app';
 import { getStorage } from 'firebase/storage';
 import firebaseConfig from './fbconfig'; // Update the path to your Firebase config file
 
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
 
 ReactDOM.render(

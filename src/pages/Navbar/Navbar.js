@@ -82,6 +82,12 @@ export default function Navbar({ onSearch }) {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleProfile = () => {
+    setAnchorEl(null);
+    navigate("/my-profile");
+  };
+
+
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
@@ -105,6 +111,7 @@ export default function Navbar({ onSearch }) {
     const auth = getAuth();
     signOut(auth)
       .then(() => {
+        localStorage.removeItem("fileData");
         navigate("/login")
       })
       .catch((error) => {
@@ -130,7 +137,7 @@ export default function Navbar({ onSearch }) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleProfile}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
       <MenuItem onClick={handleSignOut}>Sign out</MenuItem>
     </Menu>
@@ -153,12 +160,12 @@ export default function Navbar({ onSearch }) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-          {isLoggedInUserWithEmail && (<MenuItem>
+      {isLoggedInUserWithEmail && (<MenuItem onClick={() => navigate("/upload")}>
               <IconButton
                   size="large"
                   aria-label="show 4 new mails"
                   color="inherit"
-                  onClick={() => navigate("/upload")}
+                  
 
               >
                   <UploadIcon />

@@ -5,6 +5,7 @@ import Notes from './pages/notes/Notes';
 import AuthContext from "./pages/context/AuthContext";
 import ProtectedRoute  from './pages/routes/ProtectedRoute'
 import Error from './pages/Error';
+import Profile from './pages/Profile/Profile';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 
@@ -27,6 +28,10 @@ function App() {
     {
       path: "/upload",
       element: <ProtectedRoute><UploadFile /></ProtectedRoute>
+    },
+     {
+      path: "/my-profile",
+      element: <ProtectedRoute><Profile /></ProtectedRoute>
     }
   ])
   return (

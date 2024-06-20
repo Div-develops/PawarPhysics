@@ -1,36 +1,33 @@
 import { createContext, useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-
+import {app} from '../../index'
 export const Context = createContext();
+//This context will be used to share the authentication state (user object) across different components in the application.
 
 function AuthContext({ children }) {
-    const auth = getAuth();
+    const auth = getAuth(app);
+    // It initializes the Firebase Authentication instance using getAuth().
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setLoading(false);
-            setUser(currentUser);
             if (currentUser) {
+                setUser(currentUser);
+                console.log(user)
                 localStorage.setItem('user', JSON.stringify(currentUser));
             } else {
                 localStorage.removeItem('user');
+                setUser(null);
             }
+            setLoading(false);
         });
 
         return () => {
             unsubscribe();
         };
-    }, []);
-
-    useEffect(() => {
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
-            setLoading(false);
-        }
-    }, []);
+    }, [auth]);
 
     // Check if the logged-in user has the specified email address
     const isUserWithEmail = (email) => {
